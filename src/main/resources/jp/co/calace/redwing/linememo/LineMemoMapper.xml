@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 66 mapper interface reflection in xml -->
+
+
+<!-- tells xml file where Java interface path is  -->
+<mapper namespace="jp.co.calce.redwing.linememo.LineMemoMapper">
+
+	<!-- table columns name should match LineMemoEntity property of setter function
+	in this case -->
+	<resultMap id="LineMemoResult" type="jp.co.calce.redwing.linememo.LineMemoEntity">
+		<result column="id" property="id"/>
+		<result column="memo" property="memo"/>
+		<result column="upd_date" property="upd_date"/>
+	</resultMap>
+	
+	<!-- method name for selecting by id -->
+	<select id="getMemoById" resultMap="LineMemoResult" parameterType="int">
+		select id,memo,upd_date
+		from line_memo
+		where id = #{id}
+	</select>
+	
+	<!--  even if the result is list, resultMap is ok with one type? -->
+	<select id="getMemoListByKeyword" resultMap="LineMemoResult" parameterType="String">
+		select if, memo,upd_date 
+		from line_memo 
+		where memo line #{keyword} 
+		order by id
+	</select>
+	
+	<insert id="addOneMemo" parameterType="String">
+		insert into line_memo
+		(memo, upd_date) values (#{insMemo}, sysdate())
+	</insert>
+	
+	<update id="updOneMemo" parameterType="Map">
+		update line_memo
+		set
+			memo = #{updMemo}
+			upd_date = sysdate()
+		where id = #{id}
+	</update>
+</mapper>

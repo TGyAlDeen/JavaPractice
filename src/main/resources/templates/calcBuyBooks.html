@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--  064 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Amazon books </title>
+</head>
+<body>
+<h1>Welcome, This is recommened books, please check it!</h1>
+
+<form action="buyBooks" method="post">
+<select name ="bookChoice">
+<option value="edition2" selected>The Secret of Android Application Development </option>
+<option value="edition2"> 139 Rules of developing android Apps </option>
+</select>
+<input type="text" name="purchaseNo" size="4" value="100"/>
+Buy
+<br/>
+<input type="checkbox" name="useCoupon"/>Use Coupon
+<input type="submit" value="Submit"/>
+</form>
+
+<hr/>
+<div th:if"${msg}">
+<p th:utext="${msg}">Quote reult will be displayed here, it also include html tag</p>
+</div>
+<hr/>
+<a href="../rec/dailyRec">Next Task</a>
+</body>
+</html>

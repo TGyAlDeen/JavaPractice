@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Memo </title>
+<style type="text/css">
+
+tr{background: #dadeff;}
+</style>
+</head>
+<body>
+
+<p th:text="${msg}"></p>
+<h2> Memo registration</h2>
+
+<!--  inserion form -->
+<form action="add" method="post" th:object="${memoInsModel}">
+	<input type="text" name="memoStr" size="60"/>
+	<input type="submit" value="Register"/>
+</form>
+
+<hr/>
+
+<!--  edition form -->
+<h2>Edit Memo</h2>
+<form action="edit" method="post" th:object="${memoEditModel}">
+	ID:<input type="text" name="memoId" size="3"/>
+	Memo:<input type="text" name="memoStr" size="60"/>
+	<input type="submit" value="Edit & Save"/>	
+</form>
+
+<!--  Memo search form -->
+<h2>Edit Memo</h2>
+<form action="top" method="post" th:object="${memoSelModel}">
+	Keyword: <input type="text" name="keywordStr" />
+	<input type="submit" value="Search"/>	
+</form>
+
+	<!--  comment about count with index, size, current, even, odd first ,last etc
+	maybe oka-san means ordering !!? -->
+<table border="0">
+	<tr><th>No. </th> <th>ID </th> <th>Memo </th> <th>Update Date</th></tr>
+	<tr th:each="oneMemo, itemStatus : ${memos}">
+		<td th:text="${itemStatus.count}"></td>
+		<td th:text="${oneMemo.id}"></td>
+		<td th:text="${oneMemo.memo}"></td>
+		<td th:text="${oneMemo.updDateStr}"></td>
+	</tr>
+</table>
+
+<hr/>
+
+<a href="../museum/top">Next Task</a>
+
+
+</body>
+</html>

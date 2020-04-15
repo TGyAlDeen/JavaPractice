@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--  065 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Activity Record </title>
+<script type="text/javascript">
+var inputTime; //variable hold form elemet 
+var lastTime = "" ;// yyyy/mm/dd format of date
+// leadind zero digits !!
+function paddingValue(numValue,unitNo) {
+	//https://stackoverflow.com/a/3390396/
+	if(!unitNo) unitNo = 2;
+	
+	var strValue = String(numValue);
+	var strLen = strValue.length ;
+	var resultStr = "";
+	for (var i = 0; i < unitNo - strLen; ++i) {
+		resultStr +="0"
+	}
+	resultStr += strValue;
+	return resultStr;
+}
+function updateTime() {
+	var d = new Date();
+	var nowTime = 
+		d.getFullYear()
+		+ "/" + paddingValue(d.getMonth() + 1)
+		+ "/" + paddingValue(d.getDate())
+		+ " " + paddingValue(d.getHours())
+		+ ":" + paddingValue(d.getMinutes());
+	if(lastTime != nowTime){ // update only if mintes has changed
+		inputTime.value = nowTime; 
+		lastTime = nowTime;
+	}
+	setTimeout(updateTime, 1000); // repeat this process every 1 second 
+
+}
+function init() {
+	inputTime =  document.getElementById("updDate");
+	updateTime();
+	document.getElementById("mainInput").focus();
+}
+</script>
+<style>
+ td{font-size: 2em;}
+.recInput{color:#10ff01; font-size: 2em;}
+.validationErr{color: #ff0000;} 
+</style>
+</head>
+<body onload="init()">
+<h1>Todays activity record </h1>
+<div th:if="${msg}">
+<span style="colord:red;" th:text="${msg}">The message will be shown here</span>
+</div>
+
+<form action="dailyRec" method="post" th:object="${recFormValues}">
+<input type="hidden" name="mode" value="recStart"/>
+<table border="0">
+	<tr>
+		<td>Record date and time</td>
+		<td><input id="updDate" class="recInput" type="text" th:field="*{updDate}" size="16"/></td>
+		<td><span th:if="${#fields.hasErrors('updDate')}" th:errors="*{updDate}" class="validationErr"></span></td>
+	</tr>
+	<tr>
+	<td>Activity Content</td>
+		<td><input id="mainInput" class="recInput" type="text" th:field="*{recAction}"/>Finished</td>
+		<td><p th:if="${#fields.hasErrors('recAction')}" th:errors="recAction" class="validationErr"/></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input class="recInput" type="submit" value="Record" style="width: 60%"></td>
+	</tr>
+</table>
+</form>
+
+<hr />
+
+<div th:if="${pastList}">
+	<table>
+		<tr th:each="actionLine : ${pastList}">
+			<td th:text="${actionLine}">-Entry</td>
+	</table>
+</div>
+<hr/>
+<a href="../lineMemo/top">Next Task</a>
+</body>
+</html>
