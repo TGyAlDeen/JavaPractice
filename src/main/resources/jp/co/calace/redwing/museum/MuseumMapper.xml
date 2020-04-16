@@ -4,6 +4,32 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 66-2 mapper interface reflection in xml -->
 
-<mapper namespace="MuesemAllResult" type="jp.co.calace.redwing.museum.MuseunEntity">
+<mapper namespace="jp.co.calace.redwing.museum.MuseumMapper">
 
+<!-- check comments pic_id something -->
+	<resultMap id="MuseumAllResult" type="jp.co.calace.redwing.museum.MuseumEntity">
+		<result column="id" property="id"/>
+		<result column="author" property="author"/>
+		<result column="imagename" property="imagename"/>
+		<result column="imagedata" property="imagedata"/>
+		<result column="upd_date" property="updDate"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="commentator" property="commentator"/>
+		<result column="comment" property="comment"/>
+		<result column="tag_id" property="tagId"/>
+		<result column="tag" property="tag"/>
+	</resultMap>
+	
+	<resultMap id="CommentListResult" type="jp.co.calace.redwing.museum.CommentEntity">
+		<result column="id" property="id"/>
+		<result column="pic_id" property="picId"/>
+		<result column="comment" property="comment"/>
+		<result column="commentator" property="commentator"/>
+	</resultMap>
+	
+	<resultMap id="ImageDataResult" type="jp.co.calace.redwing.museumImageDataEntity">
+		<result column="imagedata" property="imagedata"/>
+	</resultMap>
+	
+	
 </mapper>
