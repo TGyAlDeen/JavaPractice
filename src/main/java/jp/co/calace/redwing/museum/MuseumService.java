@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.binding.BindingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 @Service
 public class MuseumService {
@@ -92,6 +97,98 @@ public class MuseumService {
 		int picId = -1;
 		int tagId = -1;
 		MuseumDto dto = null;
+		for(CommentEntity cEntity: commentList) {
+			if(!commentMap.containsKey(cEntity.getPicId())) {
+				commentMap.put(cEntity.getPicId(), new ArrayList<CommentInfo>());
+			}
+			//
+			commentMap.get(cEntity.getPicId()).add(new CommentInfo(cEntity.getId(), cEntity.getCommentator(), cEntity.getComment()));
+			logger.info(cEntity.getPicId() + "comment :"+cEntity.getComment());	
+		}
+		
+		//from entity to dto 
+		for(MuseumEntity entity : entityList) {
+			// tag comment and dto 
+			if (picId != entity.getId()) {
+				picId = entity.getId();
+				
+				//dto contruciton 
+				dto = new MuseumDto();
+				imageList.add(dto);
+				BeanUtils.copyProperties(entity, dto);
+				dto.setSqlTimestamp(entity.getUpdDate());
+				
+				// comment list
+				if (commentMap.containsKey(picId)) {
+					dto.setCommentList(commentMap.get(picId));
+				}
+				
+				//tag list
+				dto.setTagList(new ArrayList<String>());
+			}
+			if (entity.getTagId() != null && tagId != entity.getTagId()) {
+				tagId = entity.getTagId();
+				
+				dto.getTagList().add(entity.getTag());
+				logger.info(dto.getId()+ "tag"+ entity.getTag());
+			}
+			
+		}
+		return imageList;
+	}
+	
+	public byte[] getImageData(int picId) {
+		ImageDataEntity imageEntity = mapper.getImageData(picId);
+		byte[] imagedata = imageEntity.getImagedata();
+		
+		if (imagedata == null) {
+			return null;
+		}
+		
+		return imagedata;
+	}
+	
+	public int addImageInfo(String author, Strig imagename) throws DuplicateKeyException {
+		MuseumEntity mEntity = new MuseumEntity();
+		mEntity.setAuthor(author);
+		mEntity.setImagename(imagename);
+		mapper.addImageName(mEntity);
+		return mEntity.getId(); // return ?
+	}
+	
+	public int  getTagId(String tag) throws BindingException{
+		return mapper.getTagId(tag);
+	}
+	
+	public int addNewTag (String tag) {
+		//zenzen wakaranai // ma ma tx toka wakaru 
+		DefaultTransactionDefinition txDefnition = new DefaultTransactionDefinition();
+		txDefnition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		TransactionStatus txStatus = txManager.getTransaction(txDefnition);
+		
+		try {
+			MuseumEntity mEntity = new MuseumEntity();
+			mEntity.setTag(tag);
+			mapper.addNewTag(mEntity);
+			// Db somthing
+			txManager.commit(txStatus);
+			return mEntity.getId();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			txManager.rollback(txStatus);
+			return -1
+		}
+		
+	}
+	
+	// image id and tag id 
+	public void addPicAndTagId(int picId,int tagId) {
+		mapper.addPicAndTagId(picId, tagId);
+	}
+	
+	public void addComment(int picId,String commentator,String comment) {
+		mapper.addComment(picId, commentator, comment);
 		
 	}
 
