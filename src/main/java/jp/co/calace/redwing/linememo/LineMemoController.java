@@ -45,6 +45,9 @@ public class LineMemoController {
 			return "lineMemo";
 		}
 		
+		
+		
+		
 		//POST request for memo addition 
 		@RequestMapping(value="/lineMemo/add",method = RequestMethod.POST)
 		public String processInsert(@ModelAttribute("memoInsModel") MemoInsModel form,Model model) {
@@ -57,7 +60,7 @@ public class LineMemoController {
 		}
 		
 		//POST request for memo update
-		@RequestMapping(value="/lineMemo/top",method = RequestMethod.POST)
+		@RequestMapping(value="/lineMemo/edit",method = RequestMethod.POST)
 		public String processUpdate(@ModelAttribute("memoEditModel") MemoUpdModel form,Model model) {
 			logger.info("POST request for memmo update "+ form.memoStr);
 			
@@ -67,7 +70,7 @@ public class LineMemoController {
 			return "lineMemo";
 		}
 		
-		@RequestMapping(value="/lineMemo/edit",method = RequestMethod.POST)
+		@RequestMapping(value="/lineMemo/top",method = RequestMethod.POST)
 		public String processSearch(@ModelAttribute("memoSelModel") MemoSearchModel form,Model model) {
 			logger.info("POST request for memmo search "+ form.keywordStr);
 			

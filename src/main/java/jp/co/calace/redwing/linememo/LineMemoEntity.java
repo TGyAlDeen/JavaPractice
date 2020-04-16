@@ -31,7 +31,7 @@ public class LineMemoEntity {
 		return updDate;
 	}
 	// database table column name should match with setter function 
-	public void setUpdDate(Timestamp upd_date) { //same name as database feild 
+	public void setUpd_date(Timestamp upd_date) { //same name as database feild 
 		this.updDate = upd_date;
 	}
 	

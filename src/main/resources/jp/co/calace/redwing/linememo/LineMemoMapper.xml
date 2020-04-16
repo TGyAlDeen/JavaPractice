@@ -24,10 +24,11 @@
 	</select>
 	
 	<!--  even if the result is list, resultMap is ok with one type? -->
+												<!-- the result  -->
 	<select id="getMemoListByKeyword" resultMap="LineMemoResult" parameterType="String">
-		select if, memo,upd_date 
+		select id, memo,upd_date 
 		from line_memo 
-		where memo line #{keyword} 
+		where memo like #{keyword} 
 		order by id
 	</select>
 	
@@ -39,7 +40,7 @@
 	<update id="updOneMemo" parameterType="Map">
 		update line_memo
 		set
-			memo = #{updMemo}
+			memo = #{updMemo},
 			upd_date = sysdate()
 		where id = #{id}
 	</update>
