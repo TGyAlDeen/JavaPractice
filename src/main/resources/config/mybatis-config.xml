@@ -8,7 +8,6 @@
 	<setting name="defaultFetchSize" value="100"/>
 	<setting name="defaultStatementTimeout" value="30"/>
 </settings>
-<mappers>
-    <mapper resource="jp.co.calace.redwing.linememo/LineMemoMapper"/>
-  </mappers>
+
 </configuration>
+<!-- <mappers> <mapper resource="jp.co.calace.redwing.linememo/LineMemoMapper"/> </mappers>-->

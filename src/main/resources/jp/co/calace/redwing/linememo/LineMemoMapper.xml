@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration
+<!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 66 mapper interface reflection in xml -->
 
 
 <!-- tells xml file where Java interface path is  -->
-<mapper namespace="jp.co.calce.redwing.linememo.LineMemoMapper">
+<mapper namespace="jp.co.calace.redwing.linememo.LineMemoMapper">
 
 	<!-- table columns name should match LineMemoEntity property of setter function
 	in this case -->
-	<resultMap id="LineMemoResult" type="jp.co.calce.redwing.linememo.LineMemoEntity">
+	<resultMap id="LineMemoResult" type="jp.co.calace.redwing.linememo.LineMemoEntity">
 		<result column="id" property="id"/>
 		<result column="memo" property="memo"/>
 		<result column="upd_date" property="upd_date"/>

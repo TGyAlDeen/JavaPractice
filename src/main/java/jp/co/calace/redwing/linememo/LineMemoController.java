@@ -57,7 +57,7 @@ public class LineMemoController {
 		}
 		
 		//POST request for memo update
-		@RequestMapping(value="/lineMemo/edit",method = RequestMethod.POST)
+		@RequestMapping(value="/lineMemo/top",method = RequestMethod.POST)
 		public String processUpdate(@ModelAttribute("memoEditModel") MemoUpdModel form,Model model) {
 			logger.info("POST request for memmo update "+ form.memoStr);
 			
