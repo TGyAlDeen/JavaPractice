@@ -27,9 +27,115 @@
 		<result column="commentator" property="commentator"/>
 	</resultMap>
 	
-	<resultMap id="ImageDataResult" type="jp.co.calace.redwing.museumImageDataEntity">
+	<resultMap id="ImageDataResult" type="jp.co.calace.redwing.museum.ImageDataEntity">
 		<result column="imagedata" property="imagedata"/>
 	</resultMap>
 	
+	<!--  lest join in case of something .. check later -->
+	
+	<select id="getImageList" resultMap="MuseumAllResult">
+		select d.id, d.author, d.imagename, d.upddate, c.id as comment_id, c.commentator,
+		c.comment, t.id as tag_id, t.tag 
+		from museum_data as d 
+		left join museum_comment as c on c.pic_id = d.id
+		left join museum_pictotag as p on p.pic_id = d.id 
+		left join museum_tags as t on t.id = p.tag_id
+		order by d.id, c.id, t.id
+	</select>
+	
+	<!--  COMMENT has hash pattern -->
+	<select id="getImageAndTagList" resultMap="MuseumAllResult">
+		select d.id, d.author, d.imagename, d.upd_date, t.id as tag_id, t.tag
+		from museum_data as d
+		left join museum_pictotag as p on p.pic_id = id
+		left join museum_tags as t on t.id = p.tag_id
+		order by d.id, t.id
+	</select>
+	
+	<!--  COMMENT has hash pattern -->
+	<select id="getCommentList" resultMap="CommentListResult">
+		select id, pic_id, comment, commentator
+		from museum_comment
+		order by id,pic_id
+	</select>
+	
+	<!-- image data selection, blob !!? -->
+	<select id="getImageData" resultMap="ImageDataResult">
+		select imagedata from museum_data
+		where id = #{picId}
+	</select>
+	
+	<!-- something about id and result map type -->
+	<select id="getTagId" resultType="int" parameterType="String">
+		select id from museum_tags
+		where tag like #{tag}
+	</select>
+	
+	<!--  get last tag id in the tag table -->
+	<select id="getNewInsertedId" resultType="int">
+		select last_insert_id();
+	</select>
+	
+	<!-- @@IDENTITY !! -->
+	<!-- REGISTER Posted image on DB -->
+	<insert id="addImageName" parameterType="jp.co.calace.redwing.museum.MuseumEntity">
+		insert into museum_data
+		(author, imagename, upd_date) values (#{author},#{imagename},sysdate())
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			select @@IDENTITY
+		</selectKey>
+	</insert>
+	
+	<insert id="addImageData" parameterType="jp.co.calace.redwing.museum.MuseumEntity">
+		insert into museum_data
+		(author, imagedata, upd_date) values (#{author},#{imagedata},sysdate())
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			select @@IDENTITY
+		</selectKey>
+	</insert>
+	
+	
+	
+	<!-- TAG STUFF -->
+	<!-- tag table insertion  -->
+	<insert id="addNewTag" parameterType="jp.co.calace.redwing.museum.MuseumEntity">
+		insert into museum_tags
+		(tag) values (#{tag})
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			select @@IDENTITY
+		</selectKey>
+	</insert>
+	
+	<!--  pic and id tag -->
+	<insert id="addPicIdandTagId"  parameterType="Map">
+		insert into museum_pictotag
+		(pic_id,tag_id) values (#{picId}, #{tagId})
+	</insert>
+	
+	<!--  pic and id tag -->
+	<insert id="addComment"  parameterType="Map">
+		insert into museum_comment
+		(pic_id,commentator, comment, upd_date)
+		 values (#{picId}, #{commentator}, #{comment}, sysdate())
+	</insert>
+	
+	
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
