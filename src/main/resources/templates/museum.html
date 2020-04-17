@@ -10,7 +10,7 @@
 <h1>Museum</h1>
 <hr/>
 
-<form action="upload" method="post" enctype="multipar/form-data">
+<form action="upload" method="post" enctype="multipart/form-data">
 	<input type="radio" name="saveplace" value="INTO_FOLDER" checked="checked"> save in a folder?
 	<input type="radio" name="saveplace" value="INTO_DB" > put in DB ? <br>
 	Select photo :<input type="file" name="upFile" /><br>
@@ -22,8 +22,8 @@
 <hr/>
 
 <div th:each="ImageInfo : ${ImageList}">
-	<p th:text="${ImageInfo.id} + '&emsp;Posted By:' + ${imageInfo.author}"></p>
-	<p><img th:src="${ImageInfo.imagename}"/></p>
+	<p th:text="${ImageInfo.id} + '&emsp;Posted By:' + ${ImageInfo.author}"></p>
+	<p><img th:src="${ImageInfo.imagename}" width="240" /></p>
 	<form action="comment" method="post">
 		<input type="hidden" name="pic_id" th:value="${ImageInfo.id}">
 		Name: <input type="text" name="commentator" size="10">
@@ -31,9 +31,9 @@
 		<br>
 		<input type="submit" value="Send">
 	</form>
-	<p th:text="${'Date: ' + imageInfo.updDate}"></p>
+	<p th:text="${'Date: ' + ImageInfo.updDate}"></p>
 	<p>
-	<span th:each="tag: ${imageInfo.tagList}">
+	<span th:each="tag: ${ImageInfo.tagList}">
 		<a href
 				th:text="'#'+${tag}">
 				Tags are shown Here
@@ -43,7 +43,7 @@
 	<div>
 		Comment List: <br>
 		<div
-			th:each="commentInfo : ${imageInfo.commentList}"
+			th:each="commentInfo : ${ImageInfo.commentList}"
 			th:text="${commentInfo.comment} + '&emsp;' + ${commentInfo.commentator}">
 			Comment will shown here
 		</div>

@@ -107,7 +107,7 @@
 	</insert>
 	
 	<!--  pic and id tag -->
-	<insert id="addPicIdandTagId"  parameterType="Map">
+	<insert id="addPicIdAndTagId"  parameterType="Map">
 		insert into museum_pictotag
 		(pic_id,tag_id) values (#{picId}, #{tagId})
 	</insert>

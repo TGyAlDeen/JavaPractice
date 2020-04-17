@@ -136,7 +136,7 @@ public class MuseumService {
 		}
 		return imageList;
 	}
-	
+	 
 	public byte[] getImageData(int picId) {
 		ImageDataEntity imageEntity = mapper.getImageData(picId);
 		byte[] imagedata = imageEntity.getImagedata();
