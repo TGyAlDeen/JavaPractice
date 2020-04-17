@@ -92,11 +92,19 @@ public class MuseumController {
 			for(String tag : tagList) {
 				//tag table
 				try {
-					
-				} catch (BindingException e) {
+					tagId = service.getTagId(tag);
+					logger.info("insertion mode DB, Tag"+tag+"TagId: "+tagId);
+		
+					} catch (BindingException e) {
+						logger.info("tag id couldn't be found");
 					e.printStackTrace();
-					tagId = service.addNewTag(tag); //wakanai..
+					tagId = service.addNewTag(tag); //wakanai.. why in exception 
+					logger.info("insertion mode DB, Tag"+tag+"Tag Id: "+ tagId);
+
 				}
+				
+				
+				
 				service.addPicAndTagId(picId, tagId);
 			}
 		}
@@ -139,8 +147,8 @@ public class MuseumController {
 //		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}finally {
-			if(fileOut != null) try {fileOut.close();}catch (Exception ignore) {}
-			if(in != null) try {in.close();}catch (Exception ignore) {}
+			if(fileOut != null) try {fileOut.close();} catch (Exception ignore) {}
+			if(in != null) try {in.close();} catch (Exception ignore) {}
 		}
 	}
 	
