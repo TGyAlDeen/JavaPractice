@@ -34,7 +34,7 @@
 	<!--  lest join in case of something .. check later -->
 	
 	<select id="getImageList" resultMap="MuseumAllResult">
-		select d.id, d.author, d.imagename, d.upddate, c.id as comment_id, c.commentator,
+		select d.id, d.author, d.imagename, d.upd_date, c.id as comment_id, c.commentator,
 		c.comment, t.id as tag_id, t.tag 
 		from museum_data as d 
 		left join museum_comment as c on c.pic_id = d.id

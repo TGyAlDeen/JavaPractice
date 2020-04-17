@@ -155,6 +155,15 @@ public class MuseumService {
 		mapper.addImageName(mEntity);
 		return mEntity.getId(); // return ?
 	}
+	//data in case of DB ?
+	public int addImageData(String author, byte[] upFile) {
+		MuseumEntity mEntity = new MuseumEntity();
+		mEntity.setAuthor(author);
+		mEntity.setImagedata(upFile);
+		mapper.addImageData(mEntity);
+		return mEntity.getId(); //
+		
+	}
 	
 	public int  getTagId(String tag) throws BindingException{
 		return mapper.getTagId(tag);
