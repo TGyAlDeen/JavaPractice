@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Museum</title>
+</head>
+<body>
+
+<h1>Museum</h1>
+<hr/>
+
+<form action="upload" method="post" enctype="multipar/form-data">
+	<input type="radio" name="saveplace" value="INTO_FOLDER" checked="checked"> save in a folder?
+	<input type="radio" name="saveplace" value="INTO_DB" > put in DB ? <br>
+	Select photo :<input type="file" name="upFile" /><br>
+	photo tags (put space between tags) : <input type="text" name="tags"/> <br>
+	Author : <input type="text" name="author"/><br>
+	<input type="submit" value="Add Photo"/>
+</form>
+
+<hr/>
+
+<div th:each="ImageInfo : ${ImageList}">
+	<p th:text="${ImageInfo.id} + '&emsp;Posted By:' + ${imageInfo.author}"></p>
+	<p><img th:src="${ImageInfo.imagename}"/></p>
+	<form action="comment" method="post">
+		<input type="hidden" name="pic_id" th:value="${ImageInfo.id}">
+		Name: <input type="text" name="commentator" size="10">
+		Comment: <input type="text" name="comment">
+		<br>
+		<input type="submit" value="Send">
+	</form>
+	<p th:text="${'Date: ' + imageInfo.updDate}"></p>
+	<p>
+	<span th:each="tag: ${imageInfo.tagList}">
+		<a href
+				th:text="'#'+${tag}">
+				Tags are shown Here
+		</a>
+	</span>
+	</p>
+	<div>
+		Comment List: <br>
+		<div
+			th:each="commentInfo : ${imageInfo.commentList}"
+			th:text="${commentInfo.comment} + '&emsp;' + ${commentInfo.commentator}">
+			Comment will shown here
+		</div>
+	</div>
+	<hr/>
+</div>
+</body>
+</html>

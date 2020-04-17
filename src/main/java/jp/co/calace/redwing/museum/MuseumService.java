@@ -148,7 +148,7 @@ public class MuseumService {
 		return imagedata;
 	}
 	
-	public int addImageInfo(String author, Strig imagename) throws DuplicateKeyException {
+	public int addImageInfo(String author, String imagename) throws DuplicateKeyException {
 		MuseumEntity mEntity = new MuseumEntity();
 		mEntity.setAuthor(author);
 		mEntity.setImagename(imagename);
@@ -177,7 +177,7 @@ public class MuseumService {
 		} catch (Exception e) {
 			// TODO: handle exception
 			txManager.rollback(txStatus);
-			return -1
+			return -1;
 		}
 		
 	}
