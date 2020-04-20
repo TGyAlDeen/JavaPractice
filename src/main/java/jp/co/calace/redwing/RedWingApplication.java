@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("jp.co.calace.redwing.linememo") //66-1
 @MapperScan("jp.co.calace.redwing.museum") //66-2 mapper.xml 
+//@ComponentScan("jp.co.calace.redwing")
 public class RedWingApplication {
 
 	public static void main(String[] args) {
