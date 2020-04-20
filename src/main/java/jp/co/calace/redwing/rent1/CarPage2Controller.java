@@ -28,7 +28,9 @@ public class CarPage2Controller {
 		
 		logger.info("rentCar2 POST request");
 		
-		model.addAttribute("carSelOptList",null);
+		model.addAttribute("carSelOptList",form);
+		logger.info("form values");// why null
+//		model.addAttribute("carSelOptList",null); // why null
 		
 		if(chkResult.hasErrors()) {
 			return "redirect:/rent/rentCar1";

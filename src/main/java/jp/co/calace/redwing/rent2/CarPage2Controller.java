@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * nothing special just prepare  for page 3
  */
 // when there are more than one controller in one package
-@Controller("rent2.CarPageController")
+@Controller("rent2.CarPage2Controller")
 public class CarPage2Controller {
 
 	private Logger logger = LoggerFactory.getLogger(CarPage2Controller.class);
 	
-	@RequestMapping(value = "/rent1/rentCar2",method = RequestMethod.GET)
+	@RequestMapping(value = "/rent2/rentCar2",method = RequestMethod.GET)
 	public String processForm(Model model) {
 		
 		logger.info("rentCar2 POST request");

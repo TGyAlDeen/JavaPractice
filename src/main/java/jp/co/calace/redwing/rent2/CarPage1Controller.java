@@ -82,8 +82,8 @@ CarFormModel cfModel = new CarFormModel();
 		logger.info("rent2 Post request");
 		//register session values from browser form tags
 		session.setAttribute("carType", form.getSelectedCarType());
-		session.setAttribute("rentStart", form.getRentStartDate());
-		session.setAttribute("rentEndDate", form.getRentEndDate());
+		session.setAttribute("startDate", form.getRentStartDate());
+		session.setAttribute("endDate", form.getRentEndDate());
 		
 		//session double recording for each class ? wakanai
 		session.setAttribute("formUserInfoInSession", form);
@@ -95,6 +95,7 @@ CarFormModel cfModel = new CarFormModel();
 			model.addAttribute("msg", "rent2 post error");
 			return "rent1b";
 		}else {
+			logger.info("redirect rent 2 post");
 			return "redirect:/rent2/rentCar2";
 		}
 	}

@@ -23,7 +23,7 @@ public class CarPage3Controller {
 			Model model) {
 		logger.info("Rent Page 3 POST request !!");
 		// add hidden values into model attributes to show them on form
-		model.addAttribute("carTyoe",form.getSelectedCarType());
+		model.addAttribute("carType",form.getSelectedCarType());
 		model.addAttribute("startDate",form.getRentStartDate());
 		model.addAttribute("endDate",form.getRentEndDate());
 		

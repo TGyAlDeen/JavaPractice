@@ -27,7 +27,7 @@ public class CarPage1Controller {
 	//any name is ok 
 	// name in session should match 
 	@ModelAttribute("carRentInfo")
-	public CarFormModel initcarInfoToSession() {
+	public CarFormModel initcarInfoToSession() { //usage ?
 		logger.info("session init");
 		return new CarFormModel();
 	}

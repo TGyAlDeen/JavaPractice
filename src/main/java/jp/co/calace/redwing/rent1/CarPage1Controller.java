@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("rent1.CarPage1Controller")// sepcify bean name when there is conflict ?
 //@Controller
-@RequestMapping("rent/rentCar1")// same uri of function and controller 
+@RequestMapping("rent1/rentCar1")// same uri of function and controller 
 public class CarPage1Controller {
 
 	private static final Logger logger = LoggerFactory.getLogger(CarPage1Controller.class);

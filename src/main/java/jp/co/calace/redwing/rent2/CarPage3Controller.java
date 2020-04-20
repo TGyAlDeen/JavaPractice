@@ -19,7 +19,7 @@ public class CarPage3Controller {
 
 	private static final Logger logger = LoggerFactory.getLogger(CarPage3Controller.class);
 	
-	@RequestMapping(value = "/rent2/Car3", method = RequestMethod.GET)
+	@RequestMapping(value = "/rent2/rentCar3", method = RequestMethod.GET)
 	public String disp(
 			HttpSession session,
 			@RequestParam(value = "procMode", required = false)String procMode,
@@ -30,6 +30,7 @@ public class CarPage3Controller {
 		if ("clearSession".equals(procMode)) {
 			logger.info("clear session");
 			Enumeration<String> attrList = session.getAttributeNames();
+			
 			while(attrList.hasMoreElements()) {
 				session.removeAttribute(attrList.nextElement()); // nice 
 			}
@@ -40,7 +41,8 @@ public class CarPage3Controller {
 		model.addAttribute("carType",session.getAttribute("carType"));
 		model.addAttribute("startDate", session.getAttribute("startDate"));
 		// wakanai
-		CarFormModel formValues =(CarFormModel) session.getAttribute("formUserInfoSession");
+		CarFormModel formValues =(CarFormModel) session.getAttribute("formUserInfoInSession");
+//		CarFormModel formValues =(CarFormModel) session.getAttribute("formUserInfoSession");
 		if (formValues != null) {
 			model.addAttribute("endDate", formValues.getRentEndDate());
 		}
