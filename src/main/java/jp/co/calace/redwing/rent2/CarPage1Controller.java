@@ -6,10 +6,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -66,7 +71,34 @@ CarFormModel cfModel = new CarFormModel();
 		model.addAttribute("msg","form2 Expermint ");
 		
 		return "rent1b";
-		
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String processForm(
+			HttpSession session,
+			@Validated @ModelAttribute("carRentInfo")CarFormModel form,
+			BindingResult chkResult,
+			Model model) {
+		logger.info("rent2 Post request");
+		//register session values from browser form tags
+		session.setAttribute("carType", form.getSelectedCarType());
+		session.setAttribute("rentStart", form.getRentStartDate());
+		session.setAttribute("rentEndDate", form.getRentEndDate());
+		
+		//session double recording for each class ? wakanai
+		session.setAttribute("formUserInfoInSession", form);
+		
+		if (chkResult.hasErrors()) {
+			//get option tags values as list
+			model.addAttribute("carSelOptList",getCarSelOption());
+			//jsp message
+			model.addAttribute("msg", "rent2 post error");
+			return "rent1b";
+		}else {
+			return "redirect:/rent2/rentCar2";
+		}
+	}
+	
+	
 
 }
