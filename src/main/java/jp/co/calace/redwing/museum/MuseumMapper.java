@@ -23,7 +23,7 @@ public interface MuseumMapper {
 	void addNewTag(MuseumEntity mEntity);
 	
 	// join stuff
-	void addPicAndTagId(@Param("picId")int picId, @Param("tagId")int tagId);
+	void addPicIdAndTagId(@Param("picId")int picId, @Param("tagId")int tagId);
 	
 	
 	//Comment stuff

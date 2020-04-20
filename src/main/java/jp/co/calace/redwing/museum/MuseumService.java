@@ -193,7 +193,7 @@ public class MuseumService {
 	
 	// image id and tag id 
 	public void addPicAndTagId(int picId,int tagId) {
-		mapper.addPicAndTagId(picId, tagId);
+		mapper.addPicIdAndTagId(picId, tagId);
 	}
 	
 	public void addComment(int picId,String commentator,String comment) {

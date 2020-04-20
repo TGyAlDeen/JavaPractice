@@ -57,8 +57,6 @@ public class MuseumController {
 			RedirectAttributes redirecAttrs, Model model) {
 		
 		logger.info("saveLocation: "+saveplace+" imageFile Name: "+multipartFile.getOriginalFilename()+" Tags: "+tags+"Author: "+author);
-		
-		
 		int picId = 0;
 		int tagId = 0;
 		
@@ -88,15 +86,16 @@ public class MuseumController {
 		String[] tagList = tags.split(" ");
 		if (tagList.length > 0) {
 			logger.info("register tags");
-			
 			for(String tag : tagList) {
 				//tag table
 				try {
+					logger.info("TagList member: "+tag);
 					tagId = service.getTagId(tag);
 					logger.info("insertion mode DB, Tag"+tag+"TagId: "+tagId);
+					logger.info("TagList");
 		
 					} catch (BindingException e) {
-						logger.info("tag id couldn't be found");
+					logger.info("tag id couldn't be found");
 					e.printStackTrace();
 					tagId = service.addNewTag(tag); //wakanai.. why in exception 
 					logger.info("insertion mode DB, Tag"+tag+"Tag Id: "+ tagId);

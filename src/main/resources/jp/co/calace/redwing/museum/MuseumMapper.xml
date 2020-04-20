@@ -106,7 +106,7 @@
 		</selectKey>
 	</insert>
 	
-	<!--  pic and id tag -->
+	<!--  pic and id tag tagy -->
 	<insert id="addPicIdAndTagId"  parameterType="Map">
 		insert into museum_pictotag
 		(pic_id,tag_id) values (#{picId}, #{tagId})
