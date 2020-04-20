@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 067-1 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Session Practice page 1-b</title>
+</head>
+<body>
+<h1>Register Value</h1>
+<p th:if="${msg}" th:text="${msg}"></p>
+<form action="rentCar1" method="post" th:object="${carRentInfo}">
+	<select name="selectedCarType">
+		<option th:each="carOpt : ${carSelOptList}" th:value="${carOpt.optValue}" th:text="${carOpt.optInnerHTML}"/>
+	</select>
+Rent Start Date:
+<input type="text" name="rentStartDate" placeholder="yyyy/mm/dd" th:value="*{rentStartDate}"/>
+
+Rent End Date:
+<input type="text" name="rentEndDate" placeholder="yyyy/mm/dd" th:value="*{rentEndDate}"/>
+<input type="submit" value="Submit"/>
+
+<p th:if="${#fields.hasErrors('all')}" th:errors="*{all}"></p>
+</form>
+
+</body>
+</html>

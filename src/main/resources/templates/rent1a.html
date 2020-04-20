@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 067-1 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Session Practice page 1-a</title>
+</head>
+<body>
+<h1>Register Value</h1>
+<p th:if="${msg}" th:text="${msg}"></p>
+<p>The value entered here will be shown on second and third page</p>
+<form action="rentCar2" method="post" th:object="${carRentInfo}">
+Car Type:
+<select>
+	<option value="K-A">Light passengers Car: K-A</option>
+	<option value="K-B">Light passengers Car: K-B</option>
+	<option value="S-C">Passengers car: S-C</option>
+	<option value="S-D">Passengers car: S-D</option>
+	<option value="E-N">Echo Car: E-N</option>
+	<option value="E-S">Echo Car: E-S</option>
+	<option value="W-H">Mini-Van, one Box wagon: W-H</option>
+	<option value="W-A">Mini-Van, one Box wagon: W-A</option>
+	<option value="D-H">Van, Truck: D-H</option>
+	<option value="D-H">Van, Truck: D-B</option>
+</select>
+Rent Start Date:
+<input type="text" name="rentStartDate" placeholder="yyyy/mm/dd" th:value="*{rentStartDate}"/>
+
+Rent End Date:
+<input type="text" name="rentEndDate" placeholder="yyyy/mm/dd" th:value="*{rentEndDate}"/>
+<input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

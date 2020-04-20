@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 067-1 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Session Practice page 2</title>
+</head>
+<body>
+<h1>Pass through page only, don't pass to server</h1>
+
+<p>Terms of Use </p>
+<!-- in order to get info from page1 to page 3 we used hidden values and post it -->
+<form action="rentCar3" method="post" th:object="${carRentInfo}">
+	<input type="hidden" name="selectedCarType" th:value="${*selectedCarType}"/>
+	<input type="hidden" name="rentStartDate" th:value="${*rentStartDate}"/>
+	<input type="hidden" name="rentEndDate" th:value="${*rentEndDate}"/>
+	<input type="submit" value="Next"/>
+</form>
