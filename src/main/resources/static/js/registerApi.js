@@ -21,7 +21,7 @@ function sendAlbum1() {
 		url: "api/registerList",
 		type: "post",
 		dataType: "json",
-		contentType: "application/json",
+		contentType: "application/json; charset=utf-8",
 		scriptCharset: "utf-8",
 		data: JSON.stringify(jsonObj)
 	}).done(function(respData) {
@@ -42,13 +42,13 @@ function sendAlbum2() {
 		keyVal[element.name] = element.value;
 		jsonObj["songList"].push(keyVal);
 	});
-	console.log("json: "+JSON.stringify(jsonObj));
+	console.log("Album 2json: "+JSON.stringify(jsonObj));
 	
 	$.ajax({
 		url: "api/registerStruct",
-		type: "post",
-		ContentType: "application/json",
+		type: "post",	
 		dataType: "json",
+		ContentType: "application/json; charset=utf-8",
 		scriptCharset: "utf-8",
 		data: JSON.stringify(jsonObj)
 	}).done(function(respData) {
