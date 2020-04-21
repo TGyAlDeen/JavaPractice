@@ -79,7 +79,7 @@ public class WebApiController {
 	
 	@RequestMapping(value = "api/registerList", method = RequestMethod.POST, produces = "application/json")
 	public RespStatus receiveArtistsList(@RequestBody List<FormInputBean> form) {
-		for (int i = 0; i < form.size(); i++) {
+		for (int i = 0; i < form.size(); ++i) {
 			logger.info(i+": name"+form.get(i).getName()+", value"+form.get(i).getValue());
 		}
 		return new RespStatus("ok");
@@ -91,7 +91,7 @@ public class WebApiController {
 		logger.info("artistName"+form.getArtistName());
 		logger.info("albumName"+form.getAlbumName());
 		List<Map<String, String>> songList = form.getSongList();
-		for (int i = 0; i < songList.size(); i++) {
+		for (int i = 0; i < songList.size(); ++i) {
 			Set<String> keys = songList.get(i).keySet();
 			for(String key : keys) {
 				logger.info(key+ "->"+ songList.get(i).get(key));

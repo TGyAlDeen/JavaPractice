@@ -20,7 +20,8 @@ function sendAlbum1() {
 	$.ajax({
 		url: "api/registerList",
 		type: "post",
-		dataType: "application/json",
+		dataType: "json",
+		contentType: "application/json",
 		scriptCharset: "utf-8",
 		data: JSON.stringify(jsonObj)
 	}).done(function(respData) {
@@ -46,7 +47,8 @@ function sendAlbum2() {
 	$.ajax({
 		url: "api/registerStruct",
 		type: "post",
-		dataType: "application/json",
+		ContentType: "application/json",
+		dataType: "json",
 		scriptCharset: "utf-8",
 		data: JSON.stringify(jsonObj)
 	}).done(function(respData) {
