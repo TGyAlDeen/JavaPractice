@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 068 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Indoor main</title>
+</head>
+<body>
+LoginId: <th:block th:text="${loginId}"/>
+<a href="../logout">Logout</a>
+
+<h1>Secrets List</h1>
+<table border="0">
+	<tr>
+		<th>No.</th>
+		<th>Item</th>
+		<th>Title</th>
+	</tr>
+	
+	<!-- item status is optional -->
+	<tr th:each="secretItem, itemStatus : ${secretList}">
+		<td th:text="${itemStatus.count}"></td>
+		<!-- https://ts0818.hatenablog.com/entry/2017/10/09/144626 -->
+		<td><a th:href="@{itemInfo(categoryId=${secretItem.itemId})}" th:text="${secretItem.itemId}"></a></td>
+		<td th:text="${secretItem.categoryTitle}"></td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 068 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Item Details</title>
+</head>
+<body>
+LoginId: <th:block th:text="${loginId}"/>
+
+<a href="top">Top Page</a>
+<a href="../logout">Logout</a>
+
+<h1>Secret information</h1>
+
+<h2 th:text="${secretInfo.categoryTitle}"></h2>
+
+<div style="padding:24px;background-color:#deedff;width:640px"
+	tx:text="${secretInfo.categoryDetail}"></div>
+	
+	<hr/>
+</body>
+</html>

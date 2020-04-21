@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jp.co.calace.redwing.rent1.CarFormModel;
 
+
+//get and post request for same url but different.
+//member controll for example 
 @Controller("rent3.CarPage1Controller")
 @RequestMapping("/rent3/rentCar1")
 @SessionAttributes("carRentInfo") // {"",""} 

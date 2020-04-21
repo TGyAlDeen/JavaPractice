@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 068 -->
+<head>
+<meta charset="UTF-8"/>
+<title>Room Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<p th:text="${msg}"></p>
+
+with testuser/password you can login
+<form action="login" method="post" th:object="${loginModel}">
+	<table border="0">
+		<tr>
+			<td>User</td>
+			<td><input th:field="*{loginUser}"/></td>
+		</tr>
+		<tr>
+		<td>Pass</td>
+		<td><input th:field="*{loginPass}"/></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" value="Login"/></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
